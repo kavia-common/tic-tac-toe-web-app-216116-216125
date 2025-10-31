@@ -1,104 +1,229 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --success: #06b6d4;
+  --error: #EF4444;
+  --background: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+
+  --radius: 14px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+  --shadow-lg: 0 12px 40px rgba(17, 24, 39, 0.12);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* App container */
+.app-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: radial-gradient(1200px 600px at 50% -100px, rgba(59,130,246,0.08), transparent),
+              radial-gradient(1200px 600px at 50% 800px, rgba(6,182,212,0.08), transparent),
+              var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--text);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Card surface */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 720px;
+  padding: 28px;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card:hover {
+  box-shadow: var(--shadow-lg);
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+/* Header */
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  gap: 6px;
+  margin-bottom: 18px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.title {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+.subtitle {
   font-size: 14px;
+  color: var(--secondary);
+}
+
+/* Status and scoreboard row */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 16px 0;
+  flex-wrap: wrap;
+}
+
+/* Status */
+.status {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(59,130,246,0.08);
+  color: var(--primary);
   font-weight: 600;
+  min-height: 40px;
+}
+
+.status.win {
+  background: rgba(6,182,212,0.12);
+  color: #0e7490;
+}
+.status.draw {
+  background: rgba(100,116,139,0.12);
+  color: var(--secondary);
+}
+
+/* Board grid */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: min(420px, 90vw);
+  margin: 0 auto 18px auto;
+}
+
+/* Square button */
+.square {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  background: #f3f4f6;
+  color: var(--text);
+  font-size: clamp(32px, 7vw, 48px);
+  font-weight: 800;
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.08s ease, background 0.2s ease, box-shadow 0.25s ease;
+  display: grid;
+  place-items: center;
+  user-select: none;
 }
 
-.theme-toggle:hover {
+.square:hover:not(:disabled) {
+  background: #e5e7eb;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  box-shadow: 0 6px 18px rgba(17,24,39,0.12);
 }
 
-.theme-toggle:active {
+.square:active:not(:disabled) {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.square:disabled {
+  cursor: default;
+  opacity: 0.9;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+.square.x {
+  color: var(--primary);
+  text-shadow: 0 2px 10px rgba(59,130,246,0.2);
+}
+
+.square.o {
+  color: var(--success);
+  text-shadow: 0 2px 10px rgba(6,182,212,0.2);
+}
+
+/* Winning highlight */
+.square.win {
+  outline: 3px solid rgba(6,182,212,0.35);
+  background: linear-gradient(180deg, rgba(6,182,212,0.12), rgba(59,130,246,0.08));
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.25s ease, background 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(59,130,246,0.35);
+  outline-offset: 2px;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(59,130,246,0.35);
+}
+
+.btn.secondary {
+  background: #e5e7eb;
+  color: var(--text);
+}
+
+.btn.secondary:hover {
+  background: #d1d5db;
+  transform: translateY(-1px);
+}
+
+/* Scoreboard */
+.scoreboard {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  background: #f3f4f6;
+  color: var(--secondary);
+}
+
+.badge.x {
+  background: rgba(59,130,246,0.12);
+  color: var(--primary);
+}
+.badge.o {
+  background: rgba(6,182,212,0.14);
+  color: #0e7490;
+}
+.badge.d {
+  background: rgba(100,116,139,0.12);
+  color: var(--secondary);
+}
+
+/* Accessibility outline for any focusable */
+:focus-visible {
+  outline: 3px solid rgba(59,130,246,0.35);
+  outline-offset: 2px;
 }
