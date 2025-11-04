@@ -10,12 +10,7 @@ function Square({ value, index, onClick, isWinning, disabled, currentPlayer }) {
     ? `Square ${index + 1}, ${value}`
     : `Square ${index + 1}, empty. ${currentPlayer} to move`;
 
-  const classes = [
-    'square',
-    value === 'X' ? 'x' : '',
-    value === 'O' ? 'o' : '',
-    isWinning ? 'win' : '',
-  ]
+  const classes = ['square', value === 'X' ? 'x' : '', value === 'O' ? 'o' : '', isWinning ? 'win' : '']
     .filter(Boolean)
     .join(' ');
 

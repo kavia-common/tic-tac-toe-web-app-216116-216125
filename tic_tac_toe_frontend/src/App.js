@@ -77,11 +77,7 @@ function App() {
     setScores({ xWins: 0, oWins: 0, draws: 0 });
   };
 
-  const statusText = winner
-    ? `Winner: ${winner}`
-    : draw
-    ? 'Draw game'
-    : `Turn: ${currentPlayer}`;
+  const statusText = winner ? `Winner: ${winner}` : draw ? 'Draw game' : `Turn: ${currentPlayer}`;
 
   return (
     <div className="app-root">

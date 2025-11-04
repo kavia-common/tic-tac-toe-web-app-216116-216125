@@ -11,7 +11,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx --max-warnings=0",
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier \"**/*.{js,jsx,json,css,md,mjs}\" --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,6 +32,9 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "prettier": "^3.3.3"
   }
 }

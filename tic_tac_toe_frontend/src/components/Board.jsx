@@ -11,12 +11,13 @@ function Board({ board, onSquareClick, winningLine = [], disabled = false, curre
     <section className="board" aria-label="Game board" role="grid">
       {board.map((value, idx) => {
         const isWinning = winningLine?.includes(idx);
+        const handleClick = () => onSquareClick(idx);
         return (
           <Square
             key={idx}
             value={value}
             index={idx}
-            onClick={() => onSquareClick(idx)}
+            onClick={handleClick}
             isWinning={isWinning}
             disabled={disabled || Boolean(value)}
             currentPlayer={currentPlayer}

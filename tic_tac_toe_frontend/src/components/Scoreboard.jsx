@@ -9,9 +9,15 @@ function Scoreboard({ scores }) {
   const { xWins = 0, oWins = 0, draws = 0 } = scores || {};
   return (
     <div className="scoreboard" aria-label="Scoreboard">
-      <span className="badge x" aria-label={`X wins: ${xWins}`}>X: {xWins}</span>
-      <span className="badge o" aria-label={`O wins: ${oWins}`}>O: {oWins}</span>
-      <span className="badge d" aria-label={`Draws: ${draws}`}>Draws: {draws}</span>
+      <span className="badge x" aria-label={`X wins: ${xWins}`}>
+        X: {xWins}
+      </span>
+      <span className="badge o" aria-label={`O wins: ${oWins}`}>
+        O: {oWins}
+      </span>
+      <span className="badge d" aria-label={`Draws: ${draws}`}>
+        Draws: {draws}
+      </span>
     </div>
   );
 }
